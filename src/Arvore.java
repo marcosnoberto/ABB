@@ -118,9 +118,28 @@ public class Arvore {
             System.out.println("Apenas 1 filho, da esquerda.");
         } else if (no.getEsquerda() == null) {
             System.out.println("Apenas 1 filho, da direita.");
-            deletar1FilhoDireita(n, this.base);
+            if (this.base.getValor() == n) {
+                if (this.base.getDireita().getEsquerda() == null) {
+                    this.base.getDireita().setEsquerda(this.base.getEsquerda());
+                    this.base = this.base.getDireita();
+                } else {
+                    this.base.setValor(excluirNoDireita(n, this.base.getDireita()));
+                }
+            } else {
+                deletar1FilhoDireita(n, this.base);
+            }
         } else {
             System.out.println("Dois filhos");
+            if (this.base.getValor() == n) {
+                if (this.base.getDireita().getEsquerda() == null) {
+                    this.base.getDireita().setEsquerda(this.base.getEsquerda());
+                    this.base = this.base.getDireita();
+                } else {
+                    this.base.setValor(excluirNoDireita(n, this.base.getDireita()));
+                }
+            } else {
+                deletar1FilhoDireita(n, this.base);
+            }
         }
     }
 
