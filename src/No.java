@@ -3,6 +3,8 @@ public class No {
     private No direita;
     private No esquerda;
     private int valor;
+    private int posicaoOrdemSimetrica;
+    private int altura;
     private boolean empty;
 
     No(){
@@ -38,6 +40,22 @@ public class No {
 
     public boolean isEmpty(){
         return this.empty;
+    }
+
+    public int getPosicaoOrdemSimetrica() {
+        return posicaoOrdemSimetrica;
+    }
+
+    public void setPosicaoOrdemSimetrica(int posicaoOrdemSimetrica) {
+        this.posicaoOrdemSimetrica = posicaoOrdemSimetrica;
+    }
+
+    public int getAltura() {
+        return altura;
+    }
+
+    public void setAltura(int altura) {
+        this.altura = altura;
     }
 
 }

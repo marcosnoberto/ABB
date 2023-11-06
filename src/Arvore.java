@@ -7,6 +7,7 @@ public class Arvore {
 
     public void inserir(int n) {
         inserirRecursivo(n, this.base);
+        definirPosicaoOrdemSimetrica(base, 0);
     }
 
     private void inserirRecursivo(int n, No no) {
@@ -115,27 +116,34 @@ public class Arvore {
                 deletarFolha(n, this.base);
             }
         } else if (no.getDireita() == null) {
-            System.out.println("Apenas 1 filho, da esquerda.");
+            if (this.base.getValor() == n) {
+                if (this.base.getEsquerda().getDireita() == null) {
+                    this.base.getEsquerda().setDireita(this.base.getDireita());
+                    this.base = this.base.getEsquerda();
+                } else {
+                    this.base.setValor(excluirNoEsquerda(this.base.getEsquerda()));
+                }
+            } else {
+                deletar1FilhoEsquerda(n, this.base);
+            }
         } else if (no.getEsquerda() == null) {
-            System.out.println("Apenas 1 filho, da direita.");
             if (this.base.getValor() == n) {
                 if (this.base.getDireita().getEsquerda() == null) {
                     this.base.getDireita().setEsquerda(this.base.getEsquerda());
                     this.base = this.base.getDireita();
                 } else {
-                    this.base.setValor(excluirNoDireita(n, this.base.getDireita()));
+                    this.base.setValor(excluirNoDireita(this.base.getDireita()));
                 }
             } else {
                 deletar1FilhoDireita(n, this.base);
             }
         } else {
-            System.out.println("Dois filhos");
             if (this.base.getValor() == n) {
                 if (this.base.getDireita().getEsquerda() == null) {
                     this.base.getDireita().setEsquerda(this.base.getEsquerda());
                     this.base = this.base.getDireita();
                 } else {
-                    this.base.setValor(excluirNoDireita(n, this.base.getDireita()));
+                    this.base.setValor(excluirNoDireita(this.base.getDireita()));
                 }
             } else {
                 deletar1FilhoDireita(n, this.base);
@@ -172,29 +180,29 @@ public class Arvore {
                         no.getEsquerda().setValor(no.getEsquerda().getDireita().getValor());
                         no.getEsquerda().setDireita(no.getEsquerda().getDireita().getDireita());
                     } else {
-                        no.getEsquerda().setValor(excluirNoDireita(n, no.getEsquerda().getDireita()));
+                        no.getEsquerda().setValor(excluirNoDireita(no.getEsquerda().getDireita()));
                     }
                     return;
                 }
+                deletar1FilhoDireita(n, no.getEsquerda());
             }
-            deletar1FilhoDireita(n, no.getEsquerda());
         } else if (no.getValor() < n) {
             if (!no.getDireita().isEmpty()) {
                 if (no.getDireita().getValor() == n) {
                     if (no.getDireita().getDireita().getEsquerda() == null) {
                         no.getDireita().setValor(no.getDireita().getDireita().getValor());
-                        no.getDireita().setDireita(no.getEsquerda().getDireita().getDireita());
+                        no.getDireita().setDireita(no.getDireita().getDireita().getDireita());
                     } else {
-                        no.getDireita().setValor(excluirNoDireita(n, no.getDireita().getDireita()));
+                        no.getDireita().setValor(excluirNoDireita(no.getDireita().getDireita()));
                     }
                     return;
                 }
+                deletar1FilhoDireita(n, no.getDireita());
             }
-            deletar1FilhoDireita(n, no.getDireita());
         }
     }
 
-    private int excluirNoDireita(int n, No no) {
+    private int excluirNoDireita(No no) {
         int valor;
 
         if (no.getEsquerda().getEsquerda() == null) {
@@ -203,7 +211,247 @@ public class Arvore {
             return valor;
         }
 
-        return excluirNoDireita(n, no.getEsquerda());
+        return excluirNoDireita(no.getEsquerda());
+    }
+
+    private void deletar1FilhoEsquerda(int n, No no) {
+        if (n < no.getValor()) {
+            if (!no.getEsquerda().isEmpty()) {
+                if (no.getEsquerda().getValor() == n) {
+                    if (no.getEsquerda().getEsquerda().getDireita() == null) {
+                        no.getEsquerda().setValor(no.getEsquerda().getEsquerda().getValor());
+                        no.getEsquerda().setDireita(no.getEsquerda().getEsquerda().getDireita());
+                    } else {
+                        no.getEsquerda().setValor(excluirNoEsquerda(no.getEsquerda().getEsquerda()));
+                    }
+                    return;
+                }
+                deletar1FilhoEsquerda(n, no.getEsquerda());
+            }
+        } else if (no.getValor() < n) {
+            if (!no.getDireita().isEmpty()) {
+                if (no.getDireita().getValor() == n) {
+                    if (no.getDireita().getEsquerda().getDireita() == null) {
+                        no.getDireita().setValor(no.getDireita().getEsquerda().getValor());
+                        no.getDireita().setEsquerda(no.getDireita().getEsquerda().getEsquerda());
+                    } else {
+                        no.getDireita().setValor(excluirNoEsquerda(no.getDireita().getEsquerda()));
+                    }
+                    return;
+                }
+                deletar1FilhoEsquerda(n, no.getEsquerda());
+            }
+
+        }
+    }
+
+    private int excluirNoEsquerda(No no) {
+        int valor;
+
+        if (no.getDireita().getDireita() == null) {
+            valor = no.getDireita().getValor();
+            no.setDireita(no.getDireita().getEsquerda());
+            return valor;
+        }
+
+        return excluirNoEsquerda(no.getDireita());
+    }
+
+    // Pode receber posições invalidas ainda
+    public int enesimoElemento(int posicao) {
+        return getEnesimoElemento(this.base, posicao);
+    }
+
+    private int getEnesimoElemento(No no, int posicao) {
+        if (no.getPosicaoOrdemSimetrica() == posicao) {
+            return no.getValor();
+        } else {
+            if (posicao < no.getPosicaoOrdemSimetrica()) {
+                return getEnesimoElemento(no.getEsquerda(), posicao);
+            } else {
+                return getEnesimoElemento(no.getDireita(), posicao);
+            }
+        }
+    }
+
+    private int definirPosicaoOrdemSimetrica(No no, int contador) {
+        if (no.getEsquerda() != null) {
+            contador = definirPosicaoOrdemSimetrica(no.getEsquerda(), contador);
+        }
+
+        contador++;
+        no.setPosicaoOrdemSimetrica(contador);
+
+        if (no.getDireita() != null) {
+            contador = definirPosicaoOrdemSimetrica(no.getDireita(), contador);
+        }
+
+        return contador;
+    }
+
+    public int posicao(int x) {
+        return buscar(x).getPosicaoOrdemSimetrica();
+    }
+
+    public int mediana() {
+        No no = this.base;
+        int maior, menor, media;
+
+        while (no.getDireita() != null) {
+            no = no.getDireita();
+        }
+        maior = no.getValor();
+
+        no = this.base;
+        while (no.getEsquerda() != null) {
+            no = no.getEsquerda();
+        }
+        menor = no.getValor();
+
+        media = maior - menor;
+
+        return buscarMediana(this.base, media);
+    }
+
+    private int buscarMediana(No no, int media) {
+        if (media < no.getValor()) {
+            if (no.getEsquerda() != null) {
+                return buscarMediana(no.getEsquerda(), media);
+            }
+        } else if (no.getValor() < media) {
+            if (no.getDireita() != null && no.getDireita().getValor() <= media) {
+                return buscarMediana(no.getDireita(), media);
+            }
+        }
+        return no.getValor();
+    }
+
+    // Dando errado
+    public double média(int x) {
+        No no = buscar(x);
+        No noSalvar = no;
+        double soma = 0, quantidade, max, min;
+
+        soma = somarNos(no, soma);
+
+        while (no.getDireita() != null) {
+            no = no.getDireita();
+        }
+        max = no.getPosicaoOrdemSimetrica();
+
+        no = noSalvar;
+
+        while (no.getEsquerda() != null) {
+            no = no.getEsquerda();
+        }
+        min = no.getPosicaoOrdemSimetrica();
+
+        quantidade = max - min + 1;
+
+        return soma / quantidade;
+    }
+
+    private double somarNos(No no, double soma) {
+        soma = soma + no.getValor();
+
+        if (no.getEsquerda() != null) {
+            soma = somarNos(no.getEsquerda(), soma);
+        }
+        if (no.getDireita() != null) {
+            soma = somarNos(no.getDireita(), soma);
+        }
+        return soma;
+    }
+
+    public boolean ehCompleta() {
+        definirAltura(this.base, 0);
+        return checarCompletude(this.base, true);
+    }
+
+    public boolean ehCheia() {
+        definirAltura(this.base, 0);
+        return checarCheia(this.base, true);
+    }
+
+    private boolean checarCheia(No no, boolean status) {
+        if (no.getAltura() == 1) {
+            return true;
+        } else if (no.getDireita() == null || no.getEsquerda() == null) {
+            return false;
+        }
+
+        status = checarCheia(no.getEsquerda(), status);
+
+        if (status == false) {
+            return status;
+        }
+
+        status = checarCheia(no.getDireita(), status);
+
+        return status;
+
+    }
+
+    private boolean checarCompletude(No no, boolean status) {
+        if (no.getAltura() >= 2) {
+            return true;
+        } else if (no.getDireita() == null || no.getEsquerda() == null) {
+            return false;
+        }
+
+        status = checarCompletude(no.getEsquerda(), status);
+
+        if (status == false) {
+            return status;
+        }
+
+        status = checarCompletude(no.getDireita(), status);
+
+        return status;
+
+    }
+
+    private int definirAltura(No no, int alturaFilho) {
+        if (no.getEsquerda() == null && no.getDireita() == null) {
+            no.setAltura(1);
+            return 1;
+        }
+
+        if (no.getEsquerda() != null) {
+            alturaFilho = definirAltura(no.getEsquerda(), alturaFilho);
+        }
+        no.setAltura(alturaFilho + 1);
+
+        if (no.getDireita() != null) {
+            alturaFilho = 0;
+            alturaFilho = definirAltura(no.getDireita(), alturaFilho);
+        }
+
+        if (no.getAltura() < alturaFilho + 1) {
+            no.setAltura(alturaFilho + 1);
+        }
+
+        return no.getAltura();
+    }
+
+    public String pre_ordem() {
+        String preOrdem = "[";
+        preOrdem = percorrerPreOrdem(this.base, preOrdem);
+        preOrdem = preOrdem.substring(0, preOrdem.length() - 2) + "]";
+        return preOrdem;
+    }
+
+    public String percorrerPreOrdem(No no, String preOrdem) {
+        String valor = no.getValor() + ", ";
+        preOrdem = preOrdem + valor;
+
+        if (no.getEsquerda() != null) {
+            preOrdem = percorrerPreOrdem(no.getEsquerda(), preOrdem);
+        }
+        if (no.getDireita() != null) {
+            preOrdem = percorrerPreOrdem(no.getDireita(), preOrdem);
+        }
+        return preOrdem;
     }
 
 }

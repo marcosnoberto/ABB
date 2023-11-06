@@ -2,23 +2,39 @@ public class App {
     public static void main(String[] args) throws Exception {
         Arvore arvore = new Arvore();
 
-        arvore.inserir(250);
-        arvore.inserir(220);
-        arvore.inserir(230);
-        arvore.inserir(229);
-        arvore.inserir(260);
-        arvore.inserir(227);
-        arvore.inserir(228);
-        arvore.inserir(219);
-        arvore.inserir(218);
-        arvore.inserir(270);
+        arvore.inserir(20);
+        arvore.inserir(25);
+        arvore.inserir(24);
+        arvore.inserir(27);
+        arvore.inserir(10);
+        arvore.inserir(8);
+        arvore.inserir(11);
+        arvore.inserir(9);
+        arvore.inserir(26);
+
+        // arvore.imprimir(1);
+
+        // arvore.deletar(20);
 
         arvore.imprimir(1);
 
-        // System.out.println(arvore.buscar(4).getValor());
+        System.out.println(arvore.posicao(25));
+        System.out.println(arvore.enesimoElemento(6));
+        System.out.println(arvore.mediana());
+        System.out.println(arvore.média(25));
 
-        arvore.deletar(230);
+        if (arvore.ehCompleta()) {
+            System.out.println("Eh completa");
+        } else {
+            System.out.println("Vixi, não é completa");
+        }
 
-        arvore.imprimir(1);
+        if (arvore.ehCheia()) {
+            System.out.println("Eh cheia");
+        } else {
+            System.out.println("Vixi, não é cheia");
+        }
+
+        System.out.println(arvore.pre_ordem());
     }
 }
