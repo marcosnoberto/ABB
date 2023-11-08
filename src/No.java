@@ -7,7 +7,7 @@ public class No {
     private int altura;
     private boolean empty;
 
-    No(){
+    No() {
         this.direita = null;
         this.esquerda = null;
         this.empty = true;
@@ -25,6 +25,14 @@ public class No {
         return valor;
     }
 
+    public int getPosicaoOrdemSimetrica() {
+        return posicaoOrdemSimetrica;
+    }
+
+    public int getAltura() {
+        return altura;
+    }
+
     public void setDireita(No direita) {
         this.direita = direita;
     }
@@ -38,24 +46,15 @@ public class No {
         this.valor = valor;
     }
 
-    public boolean isEmpty(){
-        return this.empty;
-    }
-
-    public int getPosicaoOrdemSimetrica() {
-        return posicaoOrdemSimetrica;
-    }
-
     public void setPosicaoOrdemSimetrica(int posicaoOrdemSimetrica) {
         this.posicaoOrdemSimetrica = posicaoOrdemSimetrica;
-    }
-
-    public int getAltura() {
-        return altura;
     }
 
     public void setAltura(int altura) {
         this.altura = altura;
     }
 
+    public boolean isEmpty() {
+        return this.empty;
+    }
 }
