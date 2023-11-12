@@ -52,7 +52,7 @@ public class App {
                 arvore.imprimir(Integer.parseInt(scanComandos.next()));
             } else if (comando.equals("REMOVA")) {
                 arvore.deletar(Integer.parseInt(scanComandos.next()));
-                System.out.println("Nó removido.0");
+                System.out.println("Nó removido");
             }
         }
 

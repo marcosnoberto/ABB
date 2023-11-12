@@ -397,7 +397,7 @@ public class Arvore {
     }
 
     private boolean checarCompletude(No no, boolean status) {
-        if (no.getAltura() >= 2) {
+        if (no.getAltura() <= 2) {
             return true;
         } else if (no.getDireita() == null || no.getEsquerda() == null) {
             return false;
