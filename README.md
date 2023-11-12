@@ -1,18 +1,14 @@
-## Getting Started
+# Implementação de Árvore Binária de Busca
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+## Compilação e Execução
+Segue abaixo as instruções para compilação e execução do programa em uma máquina com Ubuntu:
+1. Navegue até o diretório do projeto <br>
+`cd [endereço_local]/ABB/src`
+1. Compile todos os arquivos .java no diretório <br>
+`javac *.java`
+1. Volte no diretório principal <br>
+`cd ..`
+1. Execute a classe principal do projeto <br>
+`java -cp src App`
 
-## Folder Structure
-
-The workspace contains two folders by default, where:
-
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+Certifique-se de ajustar [endereço_local] conforme necessário para refletir o local real do seu projeto. Essas instruções garantem uma compilação e execução adequadas do seu programa em uma máquina com Ubuntu.
