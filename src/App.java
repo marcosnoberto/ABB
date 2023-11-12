@@ -1,5 +1,4 @@
 import java.io.File;
-import java.io.FileReader;
 import java.util.Scanner;
 
 public class App {
@@ -22,34 +21,36 @@ public class App {
             comando = scanComandos.next();
             if (comando.equals("ENESIMO")) {
                 try {
-                    System.out.println(arvore.enesimoElemento(Integer.parseInt(scanComandos.next())));
+                    System.out.println(
+                            "Enesimo elemento: " + arvore.enesimoElemento(Integer.parseInt(scanComandos.next())));
                 } catch (Exception e) {
                     System.out.println("Elemento inválido!");
                 }
             } else if (comando.equals("POSICAO")) {
                 try {
-                    System.out.println(arvore.posicao(Integer.parseInt(scanComandos.next())));
+                    System.out.println("Posição: " + arvore.posicao(Integer.parseInt(scanComandos.next())));
                 } catch (Exception e) {
-                    System.out.println("Posição invalida!");
+                    System.out.println("Posição inválida!");
                 }
             } else if (comando.equals("MEDIANA")) {
-                System.out.println(arvore.mediana());
+                System.out.println("Mediana: " + arvore.mediana());
             } else if (comando.equals("CHEIA")) {
                 if (arvore.ehCheia()) {
-                    System.out.println("Eh cheia");
+                    System.out.println("A árvore é cheia");
                 } else {
-                    System.out.println("Vixi, não é cheia");
+                    System.out.println("A árvore não é cheia");
                 }
             } else if (comando.equals("COMPLETA")) {
                 if (arvore.ehCompleta()) {
-                    System.out.println("Eh completa");
+                    System.out.println("A árvore é completa");
                 } else {
-                    System.out.println("Vixi, não é completa");
+                    System.out.println("A árvore não é completa");
                 }
             } else if (comando.equals("IMPRIMA")) {
                 arvore.imprimir(Integer.parseInt(scanComandos.next()));
             } else if (comando.equals("REMOVA")) {
                 arvore.deletar(Integer.parseInt(scanComandos.next()));
+                System.out.println("Nó removido.0");
             }
         }
     }

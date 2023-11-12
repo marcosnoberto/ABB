@@ -290,7 +290,18 @@ public class Arvore {
     }
 
     public int posicao(int x) {
-        return buscar(x).getPosicaoOrdemSimetrica();
+        No no = this.base;
+        while (no.getValor() != x) {
+            if (no.getEsquerda() != null && x < no.getValor()) {
+                no = no.getEsquerda();
+            } else if (no.getDireita() != null && no.getValor() < x) {
+                no = no.getDireita();
+            } else {
+                no = null;
+                break;
+            }
+        }
+        return no.getPosicaoOrdemSimetrica();
     }
 
     public int mediana() {
@@ -303,7 +314,6 @@ public class Arvore {
         maior = no.getPosicaoOrdemSimetrica();
 
         media = (maior + 1) / 2;
-        System.out.println(media);
 
         return buscarMediana(this.base, media);
     }
