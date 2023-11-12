@@ -85,9 +85,11 @@ public class Arvore {
         if (!no.isEmpty()) {
             System.out.print("(" + no.getValor());
             if (no.getEsquerda() != null) {
+                System.out.print(" ");
                 imprimirFormato2Recursivo(no.getEsquerda());
             }
             if (no.getDireita() != null) {
+                System.out.print(" ");
                 imprimirFormato2Recursivo(no.getDireita());
             }
             System.out.print(")");
