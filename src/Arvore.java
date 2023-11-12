@@ -96,7 +96,7 @@ public class Arvore {
         }
     }
 
-    public void deletar(int n) {
+    public boolean deletar(int n) {
         No no = this.base;
         while (no != null) {
             if (no.getValor() == n) {
@@ -106,14 +106,14 @@ public class Arvore {
             } else if (no.getDireita() != null && no.getValor() < n) {
                 no = no.getDireita();
             } else {
-                return;
+                return false;
             }
         }
 
         if (no.getDireita() == null && no.getEsquerda() == null) {
             if (this.base.getValor() == n) {
                 this.base = null;
-                return;
+                return true;
             } else {
                 deletarFolha(n, this.base);
             }
@@ -152,6 +152,7 @@ public class Arvore {
             }
         }
         definirPosicaoOrdemSimetrica(base, 0);
+        return true;
     }
 
     private void deletarFolha(int n, No no) {
