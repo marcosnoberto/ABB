@@ -149,6 +149,7 @@ public class Arvore {
                 deletar1FilhoDireita(n, this.base);
             }
         }
+        definirPosicaoOrdemSimetrica(base, 0);
     }
 
     private void deletarFolha(int n, No no) {
@@ -257,7 +258,6 @@ public class Arvore {
         return excluirNoEsquerda(no.getDireita());
     }
 
-    // Pode receber posições invalidas ainda
     public int enesimoElemento(int posicao) {
         return getEnesimoElemento(this.base, posicao);
     }
@@ -295,38 +295,32 @@ public class Arvore {
 
     public int mediana() {
         No no = this.base;
-        int maior, menor, media;
+        int media, maior;
 
         while (no.getDireita() != null) {
             no = no.getDireita();
         }
-        maior = no.getValor();
+        maior = no.getPosicaoOrdemSimetrica();
 
-        no = this.base;
-        while (no.getEsquerda() != null) {
-            no = no.getEsquerda();
-        }
-        menor = no.getValor();
-
-        media = maior - menor;
+        media = (maior + 1) / 2;
+        System.out.println(media);
 
         return buscarMediana(this.base, media);
     }
 
     private int buscarMediana(No no, int media) {
-        if (media < no.getValor()) {
+        if (media < no.getPosicaoOrdemSimetrica()) {
             if (no.getEsquerda() != null) {
                 return buscarMediana(no.getEsquerda(), media);
             }
-        } else if (no.getValor() < media) {
-            if (no.getDireita() != null && no.getDireita().getValor() <= media) {
+        } else if (no.getPosicaoOrdemSimetrica() < media) {
+            if (no.getDireita() != null) {
                 return buscarMediana(no.getDireita(), media);
             }
         }
         return no.getValor();
     }
 
-    // Dando errado
     public double média(int x) {
         No no = buscar(x);
         No noSalvar = no;
