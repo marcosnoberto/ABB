@@ -55,5 +55,8 @@ public class App {
                 System.out.println("Nó removido.0");
             }
         }
+
+        scanEntrada.close();
+        scanComandos.close();
     }
 }
