@@ -5,29 +5,32 @@ public class Arvore {
         this.base = new No();
     }
 
-    public void inserir(int n) {
-        inserirRecursivo(n, this.base);
+    public boolean inserir(int n) {
+        boolean status = inserirRecursivo(n, this.base);
         definirPosicaoOrdemSimetrica(base, 0);
+        return status;
     }
 
-    private void inserirRecursivo(int n, No no) {
+    private boolean inserirRecursivo(int n, No no) {
         if (no.isEmpty()) {
             no.setValor(n);
+            return true;
         } else {
             if (n < no.getValor()) {
                 if (no.getEsquerda() == null) {
                     No novo = new No();
                     no.setEsquerda(novo);
                 }
-                inserirRecursivo(n, no.getEsquerda());
+                return inserirRecursivo(n, no.getEsquerda());
             } else if (no.getValor() < n) {
                 if (no.getDireita() == null) {
                     No novo = new No();
                     no.setDireita(novo);
                 }
-                inserirRecursivo(n, no.getDireita());
+                return inserirRecursivo(n, no.getDireita());
             }
         }
+        return false;
     }
 
     public No buscar(int n) {
@@ -442,14 +445,14 @@ public class Arvore {
     }
 
     public String pre_ordem() {
-        String preOrdem = "[";
+        String preOrdem = "";
         preOrdem = percorrerPreOrdem(this.base, preOrdem);
-        preOrdem = preOrdem.substring(0, preOrdem.length() - 2) + "]";
+        preOrdem = preOrdem.substring(0, preOrdem.length() - 1);
         return preOrdem;
     }
 
     public String percorrerPreOrdem(No no, String preOrdem) {
-        String valor = no.getValor() + ", ";
+        String valor = no.getValor() + " ";
         preOrdem = preOrdem + valor;
 
         if (no.getEsquerda() != null) {
