@@ -4,11 +4,13 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) throws Exception {
         Arvore arvore = new Arvore();
+        String caminho = System.getProperty("user.dir");
+        String separador = System.getProperty("file.separator");
 
-        File arquivoEntrada = new File("C:/Users/Vinicios/Desktop/ABB/arquivo_entrada.txt");
+        File arquivoEntrada = new File(caminho + separador + "arquivo_entrada.txt");
         Scanner scanEntrada = new Scanner(arquivoEntrada);
 
-        File arquivoComandos = new File("C:/Users/Vinicios/Desktop/ABB/arquivo_comandos.txt");
+        File arquivoComandos = new File(caminho + separador + "arquivo_comandos.txt");
         Scanner scanComandos = new Scanner(arquivoComandos);
 
         String comando;
