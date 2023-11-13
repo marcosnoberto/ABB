@@ -122,36 +122,26 @@ public class Arvore {
             }
         } else if (no.getDireita() == null) {
             if (this.base.getValor() == n) {
-                if (this.base.getEsquerda().getDireita() == null) {
-                    this.base.getEsquerda().setDireita(this.base.getDireita());
-                    this.base = this.base.getEsquerda();
-                } else {
-                    this.base.setValor(excluirNoEsquerda(this.base.getEsquerda()));
-                }
+                this.base = this.base.getEsquerda();
             } else {
                 deletar1FilhoEsquerda(n, this.base);
             }
         } else if (no.getEsquerda() == null) {
             if (this.base.getValor() == n) {
-                if (this.base.getDireita().getEsquerda() == null) {
-                    this.base.getDireita().setEsquerda(this.base.getEsquerda());
-                    this.base = this.base.getDireita();
-                } else {
-                    this.base.setValor(excluirNoDireita(this.base.getDireita()));
-                }
+                this.base = this.base.getDireita();
             } else {
                 deletar1FilhoDireita(n, this.base);
             }
         } else {
             if (this.base.getValor() == n) {
-                if (this.base.getDireita().getEsquerda() == null) {
-                    this.base.getDireita().setEsquerda(this.base.getEsquerda());
-                    this.base = this.base.getDireita();
+                if (this.base.getEsquerda().getDireita() == null) {
+                    this.base.getEsquerda().setDireita(this.base.getDireita());
+                    this.base = this.base.getEsquerda();
                 } else {
-                    this.base.setValor(excluirNoDireita(this.base.getDireita()));
+                    this.base.setValor(buscarFilhoExtremaDireita(this.base.getEsquerda()));
                 }
             } else {
-                deletar1FilhoDireita(n, this.base);
+                deletar2Filhos(n, this.base);
             }
         }
         definirPosicaoOrdemSimetrica(base, 0);
@@ -183,12 +173,7 @@ public class Arvore {
         if (n < no.getValor()) {
             if (!no.getEsquerda().isEmpty()) {
                 if (no.getEsquerda().getValor() == n) {
-                    if (no.getEsquerda().getDireita().getEsquerda() == null) {
-                        no.getEsquerda().setValor(no.getEsquerda().getDireita().getValor());
-                        no.getEsquerda().setDireita(no.getEsquerda().getDireita().getDireita());
-                    } else {
-                        no.getEsquerda().setValor(excluirNoDireita(no.getEsquerda().getDireita()));
-                    }
+                    no.setEsquerda(no.getEsquerda().getDireita());
                     return;
                 }
                 deletar1FilhoDireita(n, no.getEsquerda());
@@ -196,12 +181,7 @@ public class Arvore {
         } else if (no.getValor() < n) {
             if (!no.getDireita().isEmpty()) {
                 if (no.getDireita().getValor() == n) {
-                    if (no.getDireita().getDireita().getEsquerda() == null) {
-                        no.getDireita().setValor(no.getDireita().getDireita().getValor());
-                        no.getDireita().setDireita(no.getDireita().getDireita().getDireita());
-                    } else {
-                        no.getDireita().setValor(excluirNoDireita(no.getDireita().getDireita()));
-                    }
+                    no.setDireita(no.getDireita().getDireita());
                     return;
                 }
                 deletar1FilhoDireita(n, no.getDireita());
@@ -209,28 +189,11 @@ public class Arvore {
         }
     }
 
-    private int excluirNoDireita(No no) {
-        int valor;
-
-        if (no.getEsquerda().getEsquerda() == null) {
-            valor = no.getEsquerda().getValor();
-            no.setEsquerda(no.getEsquerda().getDireita());
-            return valor;
-        }
-
-        return excluirNoDireita(no.getEsquerda());
-    }
-
     private void deletar1FilhoEsquerda(int n, No no) {
         if (n < no.getValor()) {
             if (!no.getEsquerda().isEmpty()) {
                 if (no.getEsquerda().getValor() == n) {
-                    if (no.getEsquerda().getEsquerda().getDireita() == null) {
-                        no.getEsquerda().setValor(no.getEsquerda().getEsquerda().getValor());
-                        no.getEsquerda().setDireita(no.getEsquerda().getEsquerda().getDireita());
-                    } else {
-                        no.getEsquerda().setValor(excluirNoEsquerda(no.getEsquerda().getEsquerda()));
-                    }
+                    no.setEsquerda(no.getEsquerda().getEsquerda());
                     return;
                 }
                 deletar1FilhoEsquerda(n, no.getEsquerda());
@@ -238,12 +201,7 @@ public class Arvore {
         } else if (no.getValor() < n) {
             if (!no.getDireita().isEmpty()) {
                 if (no.getDireita().getValor() == n) {
-                    if (no.getDireita().getEsquerda().getDireita() == null) {
-                        no.getDireita().setValor(no.getDireita().getEsquerda().getValor());
-                        no.getDireita().setEsquerda(no.getDireita().getEsquerda().getEsquerda());
-                    } else {
-                        no.getDireita().setValor(excluirNoEsquerda(no.getDireita().getEsquerda()));
-                    }
+                    no.setEsquerda(no.getDireita().getEsquerda());
                     return;
                 }
                 deletar1FilhoEsquerda(n, no.getEsquerda());
@@ -252,7 +210,38 @@ public class Arvore {
         }
     }
 
-    private int excluirNoEsquerda(No no) {
+    private void deletar2Filhos(int n, No no) {
+        if (n < no.getValor()) {
+            if (!no.getEsquerda().isEmpty()) {
+                if (no.getEsquerda().getValor() == n) {
+                    if (no.getEsquerda().getEsquerda().getDireita() == null) {
+                        no.getEsquerda().getEsquerda().setDireita(no.getEsquerda().getDireita());
+                        no.setEsquerda(no.getEsquerda().getEsquerda());
+                    } else {
+                        no.getEsquerda().setValor(buscarFilhoExtremaDireita(no.getEsquerda().getEsquerda()));
+                    }
+                    return;
+                }
+                deletar2Filhos(n, no.getEsquerda());
+            }
+        } else if (no.getValor() < n) {
+            if (!no.getDireita().isEmpty()) {
+                if (no.getDireita().getValor() == n) {
+                    if (no.getDireita().getEsquerda().getDireita() == null) {
+                        no.getDireita().getEsquerda().setDireita(no.getDireita().getDireita());
+                        no.setDireita(no.getDireita().getEsquerda());
+                    } else {
+                        no.getDireita().setValor(buscarFilhoExtremaDireita(no.getDireita().getEsquerda()));
+                    }
+                    return;
+                }
+                deletar2Filhos(n, no.getDireita());
+            }
+
+        }
+    }
+
+    private int buscarFilhoExtremaDireita(No no) {
         int valor;
 
         if (no.getDireita().getDireita() == null) {
@@ -260,8 +249,7 @@ public class Arvore {
             no.setDireita(no.getDireita().getEsquerda());
             return valor;
         }
-
-        return excluirNoEsquerda(no.getDireita());
+        return buscarFilhoExtremaDireita(no.getDireita());
     }
 
     public int enesimoElemento(int posicao) {
