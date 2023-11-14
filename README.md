@@ -29,7 +29,7 @@ Segue abaixo as instruções para compilação e execução do programa em uma m
      java -cp bin App
      ```
 
+## Observações
+- Certifique-se de ajustar **[endereço_local]** conforme necessário para refletir o local real do projeto na sua máquina.
 - **Arquivos de Texto:**
   - No diretório raíz existem dois arquivos de texto. O primeiro, 'arquivo_comandos.txt', contém os valores iniciais da árvore, e o segundo, 'arquivo_entrada.txt', contém os comandos utilizados para rodar o programa.
-
-OBS.: Certifique-se de ajustar [endereço_local] conforme necessário para refletir o local real do projeto na sua máquina.
