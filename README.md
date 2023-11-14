@@ -1,4 +1,4 @@
-# Implementação de Árvore Binária de Busca
+# Árvore Binária de Busca em Java
 
 ## Descrição Breve
 Este projeto tem como objetivo implementar uma Árvore Binária de Busca (ABB), capaz de armazenar valores inteiros e suportar operações além das convencionais de busca, inserção e remoção. <br> <br>
@@ -7,13 +7,29 @@ A ABB implementada neste projeto inclui operações adicionais, como a busca do 
 
 ## Compilação e Execução
 Segue abaixo as instruções para compilação e execução do programa em uma máquina com Ubuntu:
-1. Navegue até o diretório do projeto <br>
-`cd [endereço_local]/ABB/src`
-1. Compile todos os arquivos .java no diretório <br>
-`javac *.java`
-1. Volte no diretório principal <br>
-`cd ..`
-1. Execute a classe principal do projeto <br>
-`java -cp src App`
+1. **Requisitos do Sistema:**
+   - Certifique-se de ter o `java` instalado em sua máquina. Se não estiver instalado, utilize o seguinte comando:
+     ```
+     sudo apt-get install openjdk-18-jdk
+     ```
 
-Certifique-se de ajustar [endereço_local] conforme necessário para refletir o local real do seu projeto. Essas instruções garantem uma compilação e execução adequadas do seu programa em uma máquina com Ubuntu.
+2. **Compilação:**
+   - Navegue até o diretório do projeto:
+     ```
+     cd [endereço_local]/ABB
+     ```
+   - Compile todos os arquivos .java do diretório e os armazene em 'bin':
+     ```
+     javac -d bin -cp src src/*.java
+     ```
+
+3. **Execução:**
+   - Execute a classe principal do projeto:
+     ```
+     java -cp bin App
+     ```
+
+- **Arquivos de Texto:**
+  - No diretório raíz existem dois arquivos de texto. O primeiro, 'arquivo_comandos.txt', contém os valores iniciais da árvore, e o segundo, 'arquivo_entrada.txt', contém os comandos utilizados para rodar o programa.
+
+OBS.: Certifique-se de ajustar [endereço_local] conforme necessário para refletir o local real do projeto na sua máquina.
